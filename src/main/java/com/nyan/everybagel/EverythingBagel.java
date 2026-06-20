@@ -4,6 +4,7 @@ import com.nyan.everybagel.blocks.ModBlocks;
 import com.nyan.everybagel.blocks.entities.ModBlockEntities;
 import com.nyan.everybagel.items.ModItems;
 import com.nyan.everybagel.items.Tabs;
+import com.nyan.everybagel.recipes.ModRecipes;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -42,6 +43,7 @@ public class EverythingBagel {
         ModBlocks.register(modEventBus);
         ModComponents.register(modEventBus);
         ModBlockEntities.register(modEventBus);
+        ModRecipes.register(modEventBus);
 
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
