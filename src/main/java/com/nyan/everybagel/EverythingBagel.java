@@ -5,6 +5,8 @@ import com.nyan.everybagel.blocks.entities.ModBlockEntities;
 import com.nyan.everybagel.items.ModItems;
 import com.nyan.everybagel.items.Tabs;
 import com.nyan.everybagel.recipes.ModRecipes;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -47,6 +49,7 @@ public class EverythingBagel {
 
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
+        modEventBus.addListener(this::registerCapabilities);
 
         // Register our mod's ModConfigSpec so that FML can create and load the config file for us
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
@@ -71,5 +74,13 @@ public class EverythingBagel {
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {
 
+    }
+
+    public void registerCapabilities(RegisterCapabilitiesEvent event) {
+        event.registerBlockEntity(
+                Capabilities.FluidHandler.BLOCK,
+                ModBlockEntities.MIXING_BOWL_BE.get(),
+                (be, side) -> be.getFluidTank()
+        );
     }
 }

@@ -2,13 +2,10 @@ package com.nyan.everybagel.blocks;
 
 import com.nyan.everybagel.blocks.entities.MixingBowlBlockEntity;
 import com.mojang.serialization.MapCodec;
+import com.nyan.everybagel.blocks.entities.dispatchers.MixingBowlUseItemOn;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.Component;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
-import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
@@ -60,29 +57,13 @@ public class MixingBowlBlock extends BaseEntityBlock {
 
     @Override
     protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
-        if (level.getBlockEntity(pos) instanceof MixingBowlBlockEntity mixingBowlBlockEntity) {
-            if (stack.isEmpty()) {
-//                SimpleContainer inv = mixingBowlBlockEntity.inventoryToContainer();
-                for  (int i = 0; i < mixingBowlBlockEntity.inventory.getSlots(); i++) {
-                    if (!level.isClientSide()) {
-                        player.displayClientMessage(Component.literal(mixingBowlBlockEntity.inventory.getStackInSlot(i).toString()), false);
-//                        player.displayClientMessage(Component.literal(inv.getItem(i).toString()), false);
-                    }
-                }
-                level.playSound(player, pos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, 1f, 1f);
-                if (level.isClientSide()) {
-                    player.displayClientMessage(Component.literal("-"), false);
-                }
-            }
-            else {
-                if (!level.isClientSide()) {
-                    var remainder = mixingBowlBlockEntity.inventory.insertItem(0, stack.copy(), false);
-                    player.displayClientMessage(Component.literal(remainder.toString()), false);
-                }
-                level.playSound(player, pos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, 1f, 2f);
-            }
+        if (level.isClientSide()) {
+            return ItemInteractionResult.SUCCESS;
         }
 
-        return ItemInteractionResult.SUCCESS;
+        if (level.getBlockEntity(pos) instanceof MixingBowlBlockEntity mixingBowlBlockEntity) {
+            return MixingBowlUseItemOn.use(mixingBowlBlockEntity, stack, state, level, pos, player, hand, hitResult);
+        }
+        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
     }
 }

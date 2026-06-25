@@ -4,10 +4,10 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 
-public class SimpleFluidInventory extends FluidTank {
+public class SimpleFluidTank extends FluidTank {
     private final BlockEntity be;
 
-    public SimpleFluidInventory(BlockEntity holder, int capacity) {
+    public SimpleFluidTank(BlockEntity holder, int capacity) {
         super(capacity);
         this.be = holder;
     }
@@ -23,5 +23,13 @@ public class SimpleFluidInventory extends FluidTank {
         if (be.getLevel() != null && !be.getLevel().isClientSide()) {
             be.getLevel().sendBlockUpdated(be.getBlockPos(), be.getBlockState(), be.getBlockState(), 3);
         }
+    }
+
+    @Override
+    public String toString() {
+        return "SimpleFluidTank{" +
+                "fluid=" + fluid +
+                ", capacity=" + capacity +
+                '}';
     }
 }

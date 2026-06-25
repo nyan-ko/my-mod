@@ -24,4 +24,11 @@ public class SimpleItemInventory extends ItemStackHandler {
             be.getLevel().sendBlockUpdated(be.getBlockPos(), be.getBlockState(), be.getBlockState(), 3);
         }
     }
+
+    @Override
+    public String toString() {
+        return "SimpleItemInventory{" +
+                "stacks=" + stacks +
+                '}';
+    }
 }

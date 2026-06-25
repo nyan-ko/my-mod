@@ -1,29 +1,53 @@
 package com.nyan.everybagel.blocks.entities;
 
+import com.nyan.everybagel.blocks.entities.shared.SimpleFluidTank;
 import com.nyan.everybagel.blocks.entities.shared.SimpleItemInventory;
+import com.nyan.everybagel.recipes.MixingBowlRecipe;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import org.jetbrains.annotations.Nullable;
 
+import static java.lang.Integer.max;
+import static java.lang.Math.min;
+
 public class MixingBowlBlockEntity extends BlockEntity {
     public static final int ITEM_CAPACITY = 5;
     public static final int FLUID_CAPACITY = 4000;
+    public static final int RECIPE_COMPLETE = 120;
 
     private final ItemStackHandler inventory;
     private final FluidTank fluidTank;
+    private MixingBowlRecipe currentRecipe;
+    private int recipeProgress = 0;
 
     public MixingBowlBlockEntity(BlockPos pos, BlockState blockState) {
         super(ModBlockEntities.MIXING_BOWL_BE.get(), pos, blockState);
         this.inventory = new SimpleItemInventory(this, ITEM_CAPACITY);
-        this.fluidTank = new FluidTank(FLUID_CAPACITY);
+        this.fluidTank = new SimpleFluidTank(this, FLUID_CAPACITY);
+    }
+
+    public boolean mix(int increment) {
+        if (currentRecipe == null) {
+            return false;
+        }
+        recipeProgress = recipeProgress + increment;
+        return recipeProgress >= RECIPE_COMPLETE;
+    }
+
+    public void setRecipe(MixingBowlRecipe recipe) {
+        if (currentRecipe != recipe) {
+            currentRecipe = recipe;
+            recipeProgress = 0;
+        }
     }
 
     @Override
@@ -50,6 +74,18 @@ public class MixingBowlBlockEntity extends BlockEntity {
         return saveWithoutMetadata(registries);
     }
 
+    @Override
+    public String toString() {
+        return "MixingBowlBlockEntity{" +
+                "inventory=" + inventory +
+                ", fluidTank=" + fluidTank +
+                ", currentRecipe=" + currentRecipe +
+                ", recipeProgress=" + recipeProgress +
+                '}';
+    }
+
     public final ItemStackHandler getInventory() { return inventory; }
     public final FluidTank getFluidTank() { return fluidTank; }
+    public final MixingBowlRecipe getCurrentRecipe() { return currentRecipe; }
+    public final int getRecipeProgress() { return recipeProgress; }
 }
