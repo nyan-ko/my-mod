@@ -3,8 +3,6 @@ package com.nyan.everybagel.datagen;
 import com.nyan.everybagel.EverythingBagel;
 import com.nyan.everybagel.datagen.items.IngredientModelProvider;
 import com.nyan.everybagel.datagen.items.ModItemModelProvider;
-import com.nyan.everybagel.items.ModItems;
-import com.nyan.everybagel.model.client.IngredientColor;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
@@ -42,6 +40,9 @@ public class DataGenerators {
         generator.addProvider(event.includeClient(), new IngredientModelProvider(packOutput, existingFileHelper));
         generator.addProvider(event.includeClient(), new ModBlockStateProvider(packOutput, existingFileHelper));
         generator.addProvider(event.includeServer(), new ModRecipeProvider(packOutput, lookupProvider));
+
+        generator.addProvider(event.includeServer(), new GateauProvider(packOutput, lookupProvider));
+        generator.addProvider(event.includeServer(), new GateauPowerProvider(packOutput, lookupProvider));
     }
 
     @SubscribeEvent
