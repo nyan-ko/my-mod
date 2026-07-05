@@ -43,6 +43,7 @@ public class DataGenerators {
 
         generator.addProvider(event.includeServer(), new GateauProvider(packOutput, lookupProvider));
         generator.addProvider(event.includeServer(), new GateauPowerProvider(packOutput, lookupProvider));
+        generator.addProvider(event.includeServer(), new GateauMixProvider(packOutput));
     }
 
     @SubscribeEvent

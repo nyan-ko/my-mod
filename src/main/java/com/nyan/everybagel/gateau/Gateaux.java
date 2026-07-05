@@ -18,7 +18,7 @@ import java.util.Map;
 public class Gateaux {
     public static final ResourceKey<Registry<Gateau>> GATEAU_REGISTRY_KEY = ResourceKey.createRegistryKey(ResourceLocation.fromNamespaceAndPath(EverythingBagel.MOD_ID, "gateau"));
 
-    public static final ResourceKey<Registry<GateauPower>> GATEAU_POWER_REGISTRY_KEY = ResourceKey.createRegistryKey(ResourceLocation.fromNamespaceAndPath(EverythingBagel.MOD_ID, "gateau/powers"));
+    public static final ResourceKey<Registry<GateauPower>> GATEAU_POWER_REGISTRY_KEY = ResourceKey.createRegistryKey(ResourceLocation.fromNamespaceAndPath(EverythingBagel.MOD_ID, "gateau_powers"));
 
     public static final ResourceKey<Gateau> DEFAULT = createGateauResourceKey("default");
     public static final ResourceKey<Gateau> DEFAULT2 = createGateauResourceKey("default2");
