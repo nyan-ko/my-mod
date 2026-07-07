@@ -24,5 +24,7 @@ public class ModItemTagProvider extends ItemTagsProvider {
                 .add(Items.STICK);
         tag(ModItemTags.MIXING_BOWL_INPUT)
                 .add(ModItems.FLOUR.get());
+        tag(ModItemTags.MILLSTONE_INPUT)
+                .add(Items.FLINT);
     }
 }

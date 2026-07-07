@@ -1,6 +1,7 @@
 package com.nyan.everybagel.blocks.entities;
 
 import com.nyan.everybagel.blocks.entities.shared.SimpleItemInventory;
+import com.nyan.everybagel.recipes.MillstoneRecipe;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -15,13 +16,30 @@ import org.jetbrains.annotations.Nullable;
 
 public class MillstoneBlockEntity extends BlockEntity {
     public static final int ITEM_SLOTS = 1;
+    public static final int RECIPE_COMPLETE = 120;
 
     private final ItemStackHandler inventory;
-
+    private MillstoneRecipe currentRecipe;
+    private int recipeProgress = 0;
 
     public MillstoneBlockEntity(BlockPos pos, BlockState blockState) {
         super(ModBlockEntities.MILLSTONE_BE.get(), pos, blockState);
         this.inventory = new SimpleItemInventory(this, ITEM_SLOTS);
+    }
+
+    public boolean mill(int increment) {
+        if (currentRecipe == null) {
+            return false;
+        }
+        recipeProgress = recipeProgress + increment;
+        return recipeProgress >= RECIPE_COMPLETE;
+    }
+
+    public void setRecipe(MillstoneRecipe recipe) {
+        if (currentRecipe != recipe) {
+            currentRecipe = recipe;
+            recipeProgress = 0;
+        }
     }
 
     @Override
@@ -50,6 +68,8 @@ public class MillstoneBlockEntity extends BlockEntity {
     public String toString() {
         return "MillstoneBlockEntity{" +
                 "inventory=" + inventory +
+                ", currentRecipe=" + currentRecipe +
+                ", recipeProgress=" + recipeProgress +
                 '}';
     }
 
