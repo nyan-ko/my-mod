@@ -1,6 +1,0 @@
-{
-  "loader": "everybagel:dynamic_geometry",
-  "variations": {
-    "base": "everybagel:item/dough/base"
-  }
-}

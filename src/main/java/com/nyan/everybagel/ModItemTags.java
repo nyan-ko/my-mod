@@ -10,8 +10,9 @@ public class ModItemTags {
 
     public static final TagKey<Item> MIXING_BOWL_INPUT = create("mixing_bowl_input");
 
+    public static final TagKey<Item> MILLSTONE_INPUT = create("millstone_input");
+
     private static TagKey<Item> create(String id) {
-        System.out.println("Creating " + id);
         return ItemTags.create(ResourceLocation.fromNamespaceAndPath(EverythingBagel.MOD_ID, id));
     }
 }

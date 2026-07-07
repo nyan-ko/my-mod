@@ -9,18 +9,16 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
-import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import org.jetbrains.annotations.Nullable;
 
-import static java.lang.Integer.max;
 import static java.lang.Math.min;
 
 public class MixingBowlBlockEntity extends BlockEntity {
-    public static final int ITEM_CAPACITY = 5;
+    public static final int ITEM_SLOTS = 5;
     public static final int FLUID_CAPACITY = 4000;
     public static final int RECIPE_COMPLETE = 120;
 
@@ -31,7 +29,7 @@ public class MixingBowlBlockEntity extends BlockEntity {
 
     public MixingBowlBlockEntity(BlockPos pos, BlockState blockState) {
         super(ModBlockEntities.MIXING_BOWL_BE.get(), pos, blockState);
-        this.inventory = new SimpleItemInventory(this, ITEM_CAPACITY);
+        this.inventory = new SimpleItemInventory(this, ITEM_SLOTS);
         this.fluidTank = new SimpleFluidTank(this, FLUID_CAPACITY);
     }
 

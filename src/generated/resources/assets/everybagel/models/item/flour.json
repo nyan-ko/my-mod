@@ -1,7 +1,0 @@
-{
-  "loader": "everybagel:dynamic_geometry",
-  "variations": {
-    "base": "everybagel:item/flour/base",
-    "coarse": "everybagel:item/flour/coarse"
-  }
-}

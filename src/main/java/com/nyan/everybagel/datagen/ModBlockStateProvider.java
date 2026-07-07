@@ -4,6 +4,7 @@ import com.nyan.everybagel.EverythingBagel;
 import com.nyan.everybagel.blocks.ModBlocks;
 import net.minecraft.data.PackOutput;
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
+import net.neoforged.neoforge.client.model.generators.ModelFile;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
@@ -15,9 +16,16 @@ public class ModBlockStateProvider extends BlockStateProvider {
     @Override
     protected void registerStatesAndModels() {
         blockWithItem(ModBlocks.DOUGH_BLOCK);
+        simpleBlockByModLoc(ModBlocks.MIXING_BOWL_BLOCK, "mixing_bowl");
+        simpleBlockByModLoc(ModBlocks.MILLSTONE_BLOCK, "millstone");
     }
 
     private void blockWithItem(DeferredBlock<?> block) {
         simpleBlockWithItem(block.get(), cubeAll(block.get()));
+    }
+
+    private void simpleBlockByModLoc(DeferredBlock<?> block, String modLoc) {
+        ModelFile model = models().getExistingFile(modLoc("block/" + modLoc));
+        simpleBlockWithItem(block.get(), model);
     }
 }

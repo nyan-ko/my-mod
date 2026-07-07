@@ -18,6 +18,7 @@ public class ModBlockTagProvider extends BlockTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
+        // TODO
         tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.DOUGH_BLOCK.get());
     }
 }

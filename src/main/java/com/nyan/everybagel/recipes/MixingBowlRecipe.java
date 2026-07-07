@@ -100,7 +100,7 @@ public class MixingBowlRecipe implements Recipe<MixingBowlRecipeInput> {
         public static final MapCodec<MixingBowlRecipe> CODEC = RecordCodecBuilder.mapCodec(inst -> inst.group(
                 Ingredient.CODEC_NONEMPTY
                         .listOf()
-                        .fieldOf("items")
+                        .fieldOf("item_inputs")
                         .flatXmap(
                                 ingredient -> {
                                     Ingredient[] arr = ingredient.toArray(Ingredient[]::new);
@@ -114,8 +114,8 @@ public class MixingBowlRecipe implements Recipe<MixingBowlRecipeInput> {
                                 DataResult::success
                         )
                         .forGetter(MixingBowlRecipe::getItemIngredients),
-                FluidIngredient.CODEC.fieldOf("fluid").forGetter(MixingBowlRecipe::getFluidIngredient),
-                ItemStack.CODEC.fieldOf("result").forGetter(MixingBowlRecipe::getOutput)
+                FluidIngredient.CODEC.fieldOf("fluid_input").forGetter(MixingBowlRecipe::getFluidIngredient),
+                ItemStack.CODEC.fieldOf("item_output").forGetter(MixingBowlRecipe::getOutput)
         ).apply(inst, MixingBowlRecipe::new));
 
         public static final StreamCodec<RegistryFriendlyByteBuf, MixingBowlRecipe> STREAM_CODEC = StreamCodec.of(

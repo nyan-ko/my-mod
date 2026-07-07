@@ -17,7 +17,10 @@ public class ModBlocks {
 
     public static final DeferredBlock<Block> DOUGH_BLOCK = registerBlock("dough_block", () -> new Block(BlockBehaviour.Properties.of().strength(4f).requiresCorrectToolForDrops()));
 
+    // TODO properties
     public static final DeferredBlock<MixingBowlBlock> MIXING_BOWL_BLOCK = registerBlock("mixing_bowl", () -> new MixingBowlBlock(BlockBehaviour.Properties.of()));
+
+    public static final DeferredBlock<MillstoneBlock> MILLSTONE_BLOCK = registerBlock("millstone", () -> new MillstoneBlock(BlockBehaviour.Properties.of()));
 
     private static <T extends Block> DeferredBlock<T> registerBlock(String name, Supplier<T> supplier) {
         DeferredBlock<T> block = BLOCKS.register(name, supplier);

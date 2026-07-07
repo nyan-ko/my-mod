@@ -1,6 +1,8 @@
 package com.nyan.everybagel.datagen;
 
+import com.nyan.everybagel.ModItemTags;
 import com.nyan.everybagel.items.ModItems;
+import com.nyan.everybagel.recipes.MillstoneRecipeBuilder;
 import com.nyan.everybagel.recipes.MixingBowlRecipeBuilder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
@@ -28,12 +30,13 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 
     @Override
     protected void buildRecipes(RecipeOutput recipeOutput) {
-        MixingBowlRecipeBuilder.of(new ItemStack(ModItems.FLOUR.get()))
+        MixingBowlRecipeBuilder.of(new ItemStack(ModItems.DOUGH.get()))
                 .requireItem(Ingredient.of(ModItems.FLOUR.get()))
                 .requireFluid(FluidIngredient.of(Fluids.WATER))
                 .unlockedBy("has_flour", has(ModItems.FLOUR))
                 .save(recipeOutput);
-
-
+        MillstoneRecipeBuilder.of(Ingredient.of(ModItemTags.MILLSTONE_INPUT), new ItemStack(ModItems.FLOUR.get()))
+                .unlockedBy("has_millstone", has(ModItems.FLOUR))
+                .save(recipeOutput);
     }
 }

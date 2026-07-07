@@ -22,6 +22,16 @@ public class ModRecipes {
         }
     });
 
+    public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<MillstoneRecipe>> MILLSTONE_SERIALIZER = SERIALIZERS.register("millstone", MillstoneRecipe.Serializer::new);
+    public static final DeferredHolder<RecipeType<?>, RecipeType<MillstoneRecipe>> MILLSTONE_TYPE = TYPES.register(
+            "millstone", () -> new RecipeType<MillstoneRecipe>() {
+                @Override
+                public String toString() {
+                    return "millstone";
+                }
+            }
+    );
+
     public static void register(IEventBus bus) {
         SERIALIZERS.register(bus);
         TYPES.register(bus);
