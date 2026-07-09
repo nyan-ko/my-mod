@@ -1,15 +1,14 @@
-package com.nyan.everybagel.datagen;
+package com.nyan.everybagel.datagen.gateau;
 
 import com.nyan.everybagel.EverythingBagel;
 import com.nyan.everybagel.gateau.Gateau;
 import com.nyan.everybagel.gateau.Gateaux;
-import com.nyan.everybagel.gateau.powers.GateauPowers;
+import com.nyan.everybagel.gateau.GateauDefinitions;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.data.PackOutput;
 import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider;
 
-import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 
@@ -21,13 +20,14 @@ public class GateauProvider extends DatapackBuiltinEntriesProvider {
     private static RegistrySetBuilder getRegistrySetBuilder() {
         return new RegistrySetBuilder()
                 .add(Gateaux.GATEAU_REGISTRY_KEY, bootstrap -> {
-                    bootstrap.register(Gateaux.FLINT, new Gateau("flint", List.of(GateauPowers.JAGGED_WEAK)));
-
+                    for (GateauDefinitions gateau : GateauDefinitions.values()) {
+                        bootstrap.register(gateau.getGateau(), new Gateau(gateau.name(), gateau.getPowers()));
+                    }
                 });
     }
 
     @Override
     public String getName() {
-        return "Gateaux: " + EverythingBagel.MOD_ID;
+        return EverythingBagel.MOD_ID + ": Gateaux";
     }
 }

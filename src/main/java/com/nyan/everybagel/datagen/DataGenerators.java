@@ -1,6 +1,10 @@
 package com.nyan.everybagel.datagen;
 
 import com.nyan.everybagel.EverythingBagel;
+import com.nyan.everybagel.datagen.gateau.GateauMixProvider;
+import com.nyan.everybagel.datagen.gateau.GateauPowerProvider;
+import com.nyan.everybagel.datagen.gateau.GateauProvider;
+import com.nyan.everybagel.datagen.gateau.GateauByItemProvider;
 import com.nyan.everybagel.datagen.items.IngredientModelProvider;
 import com.nyan.everybagel.datagen.items.ModItemModelProvider;
 import net.minecraft.core.HolderLookup;
@@ -44,6 +48,7 @@ public class DataGenerators {
         generator.addProvider(event.includeServer(), new GateauProvider(packOutput, lookupProvider));
         generator.addProvider(event.includeServer(), new GateauPowerProvider(packOutput, lookupProvider));
         generator.addProvider(event.includeServer(), new GateauMixProvider(packOutput));
+        generator.addProvider(event.includeServer(), new GateauByItemProvider(packOutput, lookupProvider));
     }
 
     @SubscribeEvent

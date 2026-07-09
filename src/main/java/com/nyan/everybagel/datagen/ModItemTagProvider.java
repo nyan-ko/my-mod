@@ -27,4 +27,9 @@ public class ModItemTagProvider extends ItemTagsProvider {
         tag(ModItemTags.MILLSTONE_INPUT)
                 .add(Items.FLINT);
     }
+
+    @Override
+    public String getName() {
+        return EverythingBagel.MOD_ID + ": Item Tags";
+    }
 }

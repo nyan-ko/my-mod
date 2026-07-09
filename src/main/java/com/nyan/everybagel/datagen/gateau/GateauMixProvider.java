@@ -1,14 +1,12 @@
-package com.nyan.everybagel.datagen;
+package com.nyan.everybagel.datagen.gateau;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.JsonElement;
 import com.mojang.serialization.JsonOps;
 import com.nyan.everybagel.EverythingBagel;
 import com.nyan.everybagel.gateau.Gateau;
-import com.nyan.everybagel.gateau.Gateaux;
 import com.nyan.everybagel.gateau.mixes.GateauMix;
 import com.nyan.everybagel.gateau.mixes.GateauMixes;
-import com.nyan.everybagel.gateau.powers.GateauPower;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
@@ -47,6 +45,6 @@ public class GateauMixProvider implements DataProvider {
 
     @Override
     public String getName() {
-        return "Gateau Mixes: " + EverythingBagel.MOD_ID;
+        return EverythingBagel.MOD_ID + ": Gateau Mixes";
     }
 }
