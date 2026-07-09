@@ -1,4 +1,4 @@
-package com.nyan.everybagel.model.client;
+package com.nyan.everybagel.client.model;
 
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.ItemOverrides;

@@ -1,6 +1,6 @@
 package com.nyan.everybagel.datagen.items;
 
-import com.nyan.everybagel.model.client.DynamicGeometryLoader;
+import com.nyan.everybagel.client.model.DynamicGeometryLoader;
 import com.google.gson.JsonObject;
 import net.neoforged.neoforge.client.model.generators.CustomLoaderBuilder;
 import net.neoforged.neoforge.client.model.generators.ItemModelBuilder;

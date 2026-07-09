@@ -1,4 +1,4 @@
-package com.nyan.everybagel.model.client;
+package com.nyan.everybagel.client.model;
 
 import com.nyan.everybagel.EverythingBagel;
 import com.google.gson.JsonDeserializationContext;

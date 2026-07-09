@@ -1,6 +1,6 @@
 package com.nyan.everybagel;
 
-import com.nyan.everybagel.model.client.DynamicGeometryLoader;
+import com.nyan.everybagel.client.model.DynamicGeometryLoader;
 import net.minecraft.client.Minecraft;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;

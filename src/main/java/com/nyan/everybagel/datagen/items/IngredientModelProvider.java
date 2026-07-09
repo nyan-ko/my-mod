@@ -2,7 +2,7 @@ package com.nyan.everybagel.datagen.items;
 
 import com.nyan.everybagel.EverythingBagel;
 import com.nyan.everybagel.items.ModItems;
-import com.nyan.everybagel.model.client.IngredientColor;
+import com.nyan.everybagel.client.model.IngredientColor;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
