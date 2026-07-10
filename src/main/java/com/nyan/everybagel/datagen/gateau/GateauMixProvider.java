@@ -24,12 +24,12 @@ public class GateauMixProvider implements DataProvider {
         this.packOutput = packOutput;
     }
 
-    public static Map.Entry<GateauMix.Inputs, GateauMix.Outputs> squish(List<ResourceKey<Gateau>> inputs, List<ResourceKey<Gateau>> outputs) {
-        return Map.entry(new GateauMix.Inputs(inputs), new GateauMix.Outputs(outputs));
+    public static Map.Entry<GateauMix.Input, GateauMix.Output> squish(List<ResourceKey<Gateau>> inputs, List<ResourceKey<Gateau>> outputs) {
+        return Map.entry(new GateauMix.Input(inputs), new GateauMix.Output(outputs));
     }
 
-    private static Map<GateauMix.Inputs, GateauMix.Outputs> getContents() {
-        return ImmutableMap.<GateauMix.Inputs, GateauMix.Outputs>builder()
+    private static Map<GateauMix.Input, GateauMix.Output> getContents() {
+        return ImmutableMap.<GateauMix.Input, GateauMix.Output>builder()
 //                .put(squish(List.of(Gateaux.DEFAULT, Gateaux.DEFAULT2), List.of(Gateaux.DEFAULT2)))
                 .build();
     }

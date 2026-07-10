@@ -21,7 +21,7 @@ public class GateauMixLoader extends SimpleJsonResourceReloadListener {
 
     public static final GateauMixLoader INSTANCE = new GateauMixLoader();
 
-    private Map<GateauMix.Inputs, GateauMix.Outputs> mixes;
+    private Map<GateauMix.Input, GateauMix.Output> mixes;
 
     private GateauMixLoader() {
         super(GSON, folder);
@@ -30,7 +30,7 @@ public class GateauMixLoader extends SimpleJsonResourceReloadListener {
 
     @Override
     protected void apply(Map<ResourceLocation, JsonElement> object, ResourceManager resourceManager, ProfilerFiller profiler) {
-        ImmutableMap.Builder<GateauMix.Inputs, GateauMix.Outputs> builder = ImmutableMap.builder();
+        ImmutableMap.Builder<GateauMix.Input, GateauMix.Output> builder = ImmutableMap.builder();
         for (Map.Entry<ResourceLocation, JsonElement> entry : object.entrySet()) {
             ResourceLocation loc = entry.getKey();
             JsonElement json = entry.getValue();
@@ -41,5 +41,5 @@ public class GateauMixLoader extends SimpleJsonResourceReloadListener {
         this.mixes = builder.build();
     }
 
-    public Map<GateauMix.Inputs, GateauMix.Outputs> getMixes() { return mixes; }
+    public Map<GateauMix.Input, GateauMix.Output> getMixes() { return mixes; }
 }
