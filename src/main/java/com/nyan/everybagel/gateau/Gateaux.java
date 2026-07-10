@@ -28,6 +28,7 @@ public class Gateaux {
     public static final Codec<Gateau> CODEC = RecordCodecBuilder.create(instance ->
             instance.group(
                     Codec.STRING.fieldOf("id").forGetter(Gateau::getId),
+                    Gateau.Visual.CODEC.fieldOf("look").forGetter(Gateau::getLook),
                     ResourceKey.codec(GateauPowers.GATEAU_POWER_REGISTRY_KEY).listOf().fieldOf("powers").forGetter(Gateau::getPowers)
             ).apply(instance, Gateau::new)
     );

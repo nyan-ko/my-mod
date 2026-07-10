@@ -16,6 +16,7 @@ import java.util.Map;
 public class GateauPowers {
     public static final ResourceKey<Registry<GateauPower>> GATEAU_POWER_REGISTRY_KEY = ResourceKey.createRegistryKey(ResourceLocation.fromNamespaceAndPath(EverythingBagel.MOD_ID, "gateau_powers"));
 
+    public static final ResourceKey<GateauPower> PLACEHOLDER = createPowerResourceKey("placeholder");
     public static final ResourceKey<GateauPower> JAGGED = createPowerResourceKey("jagged");
 
     private static ResourceKey<GateauPower> createPowerResourceKey(String key) {

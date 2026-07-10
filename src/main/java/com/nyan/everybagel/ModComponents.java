@@ -5,6 +5,7 @@ import com.nyan.everybagel.gateau.Gateau;
 import com.nyan.everybagel.gateau.Gateaux;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -18,7 +19,7 @@ public class ModComponents {
 
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> INGREDIENT_TINT = register("ingredient_tint", builder -> builder.persistent(Codec.INT));
 
-    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Gateau>> GATEAU = register("gateau", builder -> builder.persistent(Gateaux.CODEC));
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<ResourceKey<Gateau>>> GATEAU = register("gateau", builder -> builder.persistent(ResourceKey.codec(Gateaux.GATEAU_REGISTRY_KEY)));
 
     private static <T> DeferredHolder<DataComponentType<?>, DataComponentType<T>> register(String name, UnaryOperator<DataComponentType.Builder<T>> builderOperator) {
         return DATA_COMPONENT_TYPE.register(name, () -> builderOperator.apply(DataComponentType.builder()).build());
