@@ -6,6 +6,7 @@ import com.nyan.everybagel.gateau.powers.GateauPower;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.FastColor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Gateau {
@@ -33,6 +34,30 @@ public class Gateau {
 
         public static Visual of(int r, int g, int b, String variation) {
             return new Visual(FastColor.ARGB32.color(r, g, b), variation);
+        }
+    }
+
+    public static class Key {
+        private final ResourceKey<Gateau> key;
+
+        public Key(ResourceKey<Gateau> key) {
+            this.key = key;
+        }
+    }
+
+    public static class KeyList {
+        private final List<Key> keys;
+
+        private KeyList(List<Gateau.Key> keys) {
+            this.keys = new ArrayList<>(keys);
+        }
+
+        public static KeyList of(List<Gateau.Key> keys) {
+            return new KeyList(keys);
+        }
+
+        public void add(Gateau.Key key) {
+            keys.add(key);
         }
     }
 }
