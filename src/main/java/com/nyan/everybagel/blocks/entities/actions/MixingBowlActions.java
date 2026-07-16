@@ -1,7 +1,9 @@
 package com.nyan.everybagel.blocks.entities.actions;
 
+import com.nyan.everybagel.ModComponents;
 import com.nyan.everybagel.blocks.entities.MixingBowlBlockEntity;
 import com.nyan.everybagel.blocks.entities.shared.FluidContainerAction;
+import com.nyan.everybagel.gateau.GateauAssembler;
 import com.nyan.everybagel.gateau.mixes.GateauMixes;
 import com.nyan.everybagel.recipes.MixingBowlRecipe;
 import com.nyan.everybagel.recipes.MixingBowlRecipeInput;
@@ -19,6 +21,7 @@ import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemHandlerHelper;
 import net.neoforged.neoforge.items.wrapper.InvWrapper;
 
+import java.util.List;
 import java.util.function.Function;
 
 public class MixingBowlActions {
@@ -36,10 +39,13 @@ public class MixingBowlActions {
         be.setRecipe(recipe.value());
         var finished = be.mix(MixingBowlBlockEntity.RECIPE_COMPLETE / 20);
         if (finished) {
-            ItemHandlerHelper.giveItemToPlayer(player, recipe.value().getOutput().copy());
+            var result = recipe.value().getOutput().copy();
+            var inputGateaux = GateauAssembler.sumInputGateaux(be.getInventory());
+            var outputGateaux = GateauAssembler.calculateMixOutputs(inputGateaux);
+            result.set(ModComponents.GATEAU, outputGateaux);
+            ItemHandlerHelper.giveItemToPlayer(player, result);
             be.setRecipe(null);
         }
-//        player.getItemInHand(InteractionHand.MAIN_HAND).get()
     }
 
     public static void insert(IItemHandler inventory, ItemStack stack, Player player, InteractionHand hand) {
