@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.mojang.serialization.JsonOps;
+import com.nyan.everybagel.gateau.GateauSet;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
@@ -21,7 +22,7 @@ public class GateauMixLoader extends SimpleJsonResourceReloadListener {
 
     public static final GateauMixLoader INSTANCE = new GateauMixLoader();
 
-    private Map<GateauMix.Input, GateauMix.Output> mixes;
+    private Map<GateauSet, GateauSet> mixes;
 
     private GateauMixLoader() {
         super(GSON, folder);
@@ -30,7 +31,7 @@ public class GateauMixLoader extends SimpleJsonResourceReloadListener {
 
     @Override
     protected void apply(Map<ResourceLocation, JsonElement> object, ResourceManager resourceManager, ProfilerFiller profiler) {
-        ImmutableMap.Builder<GateauMix.Input, GateauMix.Output> builder = ImmutableMap.builder();
+        ImmutableMap.Builder<GateauSet, GateauSet> builder = ImmutableMap.builder();
         for (Map.Entry<ResourceLocation, JsonElement> entry : object.entrySet()) {
             ResourceLocation loc = entry.getKey();
             JsonElement json = entry.getValue();
@@ -41,5 +42,5 @@ public class GateauMixLoader extends SimpleJsonResourceReloadListener {
         this.mixes = builder.build();
     }
 
-    public Map<GateauMix.Input, GateauMix.Output> getMixes() { return mixes; }
+    public Map<GateauSet, GateauSet> getMixes() { return mixes; }
 }

@@ -2,6 +2,8 @@ package com.nyan.everybagel;
 
 import com.nyan.everybagel.blocks.ModBlocks;
 import com.nyan.everybagel.blocks.entities.ModBlockEntities;
+import com.nyan.everybagel.gateau.Gateau;
+import com.nyan.everybagel.gateau.GateauSet;
 import com.nyan.everybagel.gateau.Gateaux;
 import com.nyan.everybagel.gateau.mixes.GateauMixLoader;
 import com.nyan.everybagel.items.ModItems;
@@ -72,7 +74,7 @@ public class EverythingBagel {
             registry.listElements().forEach(ref -> {
                 var gateau = ref.value();
                 var stack = ModItems.FLOUR.toStack();
-                stack.set(ModComponents.GATEAU, List.of(ref.key()));
+                stack.set(ModComponents.GATEAU, GateauSet.of(new Gateau.Key(ref.key())));
                 stack.set(ModComponents.INGREDIENT, gateau.getLook().variation());
                 stack.set(ModComponents.INGREDIENT_TINT, gateau.getLook().color());
                 event.accept(stack);

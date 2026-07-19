@@ -19,10 +19,10 @@ import net.neoforged.neoforge.registries.datamaps.RegisterDataMapTypesEvent;
 public class Gateaux {
     public static final ResourceKey<Registry<Gateau>> GATEAU_REGISTRY_KEY = ResourceKey.createRegistryKey(ResourceLocation.fromNamespaceAndPath(EverythingBagel.MOD_ID, "gateau"));
 
-    public static final DataMapType<Item, ResourceKey<Gateau>> GATEAU_BY_ITEM = DataMapType.builder(
+    public static final DataMapType<Item, Gateau.Key> GATEAU_BY_ITEM = DataMapType.builder(
             ResourceLocation.fromNamespaceAndPath(EverythingBagel.MOD_ID, "gateau_by_item"),
             Registries.ITEM,
-            ResourceKey.codec(GATEAU_REGISTRY_KEY)
+            Gateau.Key.CODEC
     ).build();
 
     public static final Codec<Gateau> CODEC = RecordCodecBuilder.create(instance ->

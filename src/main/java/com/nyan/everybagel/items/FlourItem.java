@@ -14,6 +14,6 @@ public class FlourItem extends Item {
     @Override
     public Component getName(ItemStack stack) {
         var gateau = stack.get(ModComponents.GATEAU);
-        return Component.literal(gateau.location().toString() + " flour");
+        return Component.literal(gateau + " flour");
     }
 }

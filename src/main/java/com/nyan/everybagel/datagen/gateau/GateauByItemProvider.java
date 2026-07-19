@@ -18,7 +18,7 @@ public class GateauByItemProvider extends DataMapProvider {
     protected void gather(HolderLookup.Provider provider) {
         var map = builder(Gateaux.GATEAU_BY_ITEM);
         for (GateauDefaults wg : GateauDefaults.values()) {
-            map.add(wg.getTag(), wg.getGateau(), false);
+            map.add(wg.getTag(), wg.getKey(), false);
         }
     }
 }
