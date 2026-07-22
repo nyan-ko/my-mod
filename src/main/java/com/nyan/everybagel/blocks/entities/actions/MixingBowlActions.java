@@ -4,7 +4,10 @@ import com.nyan.everybagel.ModComponents;
 import com.nyan.everybagel.blocks.entities.MixingBowlBlockEntity;
 import com.nyan.everybagel.blocks.entities.shared.FluidContainerAction;
 import com.nyan.everybagel.gateau.GateauAssembler;
+import com.nyan.everybagel.gateau.GateauDefaults;
+import com.nyan.everybagel.gateau.GateauSet;
 import com.nyan.everybagel.gateau.mixes.GateauMixes;
+import com.nyan.everybagel.items.ModItems;
 import com.nyan.everybagel.recipes.MixingBowlRecipe;
 import com.nyan.everybagel.recipes.MixingBowlRecipeInput;
 import com.nyan.everybagel.recipes.ModRecipes;
@@ -33,6 +36,11 @@ public class MixingBowlActions {
             var stack = player.getItemInHand(InteractionHand.OFF_HAND);
             player.displayClientMessage(Component.literal(stack.getComponents().toString()), false);
         }
+        else if (player.getItemInHand(InteractionHand.OFF_HAND).isEmpty()) {
+            var stack = new ItemStack(ModItems.FLOUR.get());
+            stack.set(ModComponents.GATEAU, GateauSet.of(GateauDefaults.IRON, GateauDefaults.COPPER));
+            player.setItemInHand(InteractionHand.OFF_HAND, stack);
+        }
     }
 
     public static void mix(MixingBowlBlockEntity be, RecipeHolder<MixingBowlRecipe> recipe, Player player) {
@@ -41,7 +49,7 @@ public class MixingBowlActions {
         if (finished) {
             var result = recipe.value().getOutput().copy();
             var inputGateaux = GateauAssembler.sumInputGateaux(be.getInventory());
-            var outputGateaux = GateauAssembler.calculateMixOutputs(inputGateaux);
+            var outputGateaux = GateauAssembler.computeCombinations(inputGateaux);
             result.set(ModComponents.GATEAU, outputGateaux);
             ItemHandlerHelper.giveItemToPlayer(player, result);
             be.setRecipe(null);

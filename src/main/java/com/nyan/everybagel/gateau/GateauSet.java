@@ -3,6 +3,7 @@ package com.nyan.everybagel.gateau;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceKey;
 import org.jetbrains.annotations.NotNull;
 
@@ -11,16 +12,19 @@ import java.util.stream.Collectors;
 
 public class GateauSet implements Set<Gateau.Key> {
     private final TreeSet<Gateau.Key> set;
+    private String printName;
     private boolean dirty;
     private int xor;
 
     public static final Codec<GateauSet> CODEC = Gateau.Key.CODEC.listOf().xmap(GateauSet::of, set -> set.stream().toList());
+    public static final GateauSet EMPTY = of();
 
     private GateauSet(TreeSet<Gateau.Key> set) {
         this.set = set;
-        this.dirty = false;
+        this.dirty = true;
         this.xor = 0;
         reXor();
+        this.printName = getName();
     }
 
     public static GateauSet of() {
@@ -138,14 +142,31 @@ public class GateauSet implements Set<Gateau.Key> {
         set.clear();
     }
 
+    public String getName() {
+        if (dirty) {
+            if (size() == 1) {
+                var connection = Minecraft.getInstance().getConnection();
+                if (connection != null) {
+                    connection.registryAccess().registry(Gateaux.GATEAU_REGISTRY_KEY).ifPresent(
+                            gateaux -> printName = gateaux.get(this.set.first().getKey()).getId());
+                }
+                else {
+                    printName = "ERROR";
+                }
+            }
+            else if (size() > 1) {
+                printName = "many";
+            }
+            else {
+                printName = "EMPTY2";
+            }
+        }
+        return printName;
+    }
+
     @Override
     public String toString() {
-        if (size() == 1) {
-            return set.getFirst().toString();
-        }
-        else {
-            return "" + size();
-        }
+        return set.toString();
     }
 
     public TreeSet<Gateau.Key> getSet() { return set; }

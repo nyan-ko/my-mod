@@ -66,5 +66,10 @@ public class Gateau {
         public int hashCode() {
             return key.location().hashCode();
         }
+
+        @Override
+        public String toString() {
+            return key.toString();
+        }
     }
 }
